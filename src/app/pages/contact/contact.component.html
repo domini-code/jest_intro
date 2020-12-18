@@ -1,16 +1,16 @@
 <div class="col-6 offset-md-3">
   <div class="card mt-3">
     <div class="card-body">
-      <form>
-        <legend>Mail list <span class="text-primary">DOMINICODE</span></legend>
+      <form [formGroup]="contactForm" (ngSubmit)="onSaveForm()">
+        <legend class="text-center">Mailing List <span class="text-primary"> DOMINICODE</span></legend>
         <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+          <label for="emailInput" class="form-label">Email address</label>
+          <input formControlName="email" type="email" class="form-control" id="emailInput"
+            placeholder="name@example.com">
         </div>
-
         <div class="mb-3">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="checkPolicy">
+            <input formControlName="policy" class="form-check-input" type="checkbox" id="checkPolicy">
             <label class="form-check-label" for="checkPolicy">
               Accept privacy policy
             </label>
