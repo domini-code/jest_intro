@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ContactComponent implements OnInit {
   contactForm: FormGroup;
-
+  private isEmail = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -17,16 +17,25 @@ export class ContactComponent implements OnInit {
 
   onSaveForm(): void {
     if (this.contactForm.valid) {
-      console.log(this.contactForm.value);
+      console.log('Form-> ' + JSON.stringify(this.contactForm.value));
       alert('Form saved!!');
     } else {
       alert('Not valid');
     }
+    this.contactForm.reset();
+  }
+
+  isValidField(name: string): boolean {
+    return (
+      (this.contactForm.get(name).touched ||
+        this.contactForm.get(name).dirty) &&
+      !this.contactForm.get(name).valid
+    );
   }
 
   private initForm(): void {
     this.contactForm = this.fb.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
       policy: ['', Validators.required],
     });
   }

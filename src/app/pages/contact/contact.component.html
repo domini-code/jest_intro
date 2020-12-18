@@ -6,14 +6,27 @@
         <div class="mb-3">
           <label for="emailInput" class="form-label">Email address</label>
           <input formControlName="email" type="email" class="form-control" id="emailInput"
-            placeholder="name@example.com">
+            placeholder="name@example.com" [ngClass]="{ 'is-invalid': isValidField('email') }">
+          <div class="invalid-feedback">
+            <span *ngIf="contactForm.get('email').errors?.required">
+              Please enter your email.
+            </span>
+            <span *ngIf="contactForm.get('email').errors?.pattern">
+              Please enter a valid email.
+            </span>
+          </div>
         </div>
         <div class="mb-3">
           <div class="form-check">
             <input formControlName="policy" class="form-check-input" type="checkbox" id="checkPolicy">
-            <label class="form-check-label" for="checkPolicy">
+            <label class="form-check-label" for="checkPolicy" [ngClass]="{ 'is-invalid': isValidField('email') }">
               Accept privacy policy
             </label>
+            <div class="invalid-feedback">
+              <span *ngIf="contactForm.get('policy').errors?.required">
+                Please accept the privacy policy.
+              </span>
+            </div>
           </div>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Submit</button>
