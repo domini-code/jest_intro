@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "jest"
+  "defaultProject": "jest",
+  "cli": {
+    "analytics": false
+  }
 }
