@@ -10,6 +10,7 @@ import { Dominicoder } from 'src/app/models/dominicoder';
 export class ContactComponent implements OnInit {
   contactForm: FormGroup;
   private isEmail = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
+  // tslint:disable-next-line:no-output-on-prefix
   @Output() onSave: EventEmitter<Dominicoder> = new EventEmitter();
   constructor(private fb: FormBuilder) { }
 
@@ -23,10 +24,10 @@ export class ContactComponent implements OnInit {
       alert('Form saved!!');
       this.onSave.emit(
         new Dominicoder(this.contactForm.value.email, this.contactForm.value.policy)
-      )
+      );
     } else {
       alert('Not valid');
-      this.onSave.emit(new Dominicoder("", false));
+      this.onSave.emit(new Dominicoder('', false));
     }
     this.contactForm.reset();
   }
@@ -45,5 +46,4 @@ export class ContactComponent implements OnInit {
       policy: ['', Validators.required],
     });
   }
-
 }

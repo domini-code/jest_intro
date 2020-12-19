@@ -1,3 +1,4 @@
+// tslint:disable:no-string-literal
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Dominicoder } from 'src/app/models/dominicoder';
@@ -10,10 +11,10 @@ describe('ContactComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ ReactiveFormsModule, FormsModule],
-      declarations: [ ContactComponent ]
+      declarations: [ContactComponent],
+      imports: [ReactiveFormsModule, FormsModule],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -28,22 +29,21 @@ describe('ContactComponent', () => {
   });
 
   it('should empty email field be invalid', () => {
-    let email = component.contactForm.controls['email'];
+    const email = component.contactForm.controls['email'];
     expect(email.valid).toBeFalsy();
   });
 
   it('should email field have required error', () => {
     let errors = {};
-    let email = component.contactForm.controls['email'];
+    const email = component.contactForm.controls['email'];
     errors = email.errors || {};
     expect(errors['required']).toBeTruthy();
   });
 
   it('should invalid email field have pattern error', () => {
-    debugger;
     let errors = {};
-    let email = component.contactForm.controls['email'];
-    email.setValue("arrecia1ahi.");
+    const email = component.contactForm.controls['email'];
+    email.setValue('arrecia1ahi.');
 
     errors = email.errors || {};
     expect(errors['pattern']).toBeTruthy();
@@ -52,21 +52,21 @@ describe('ContactComponent', () => {
 
   it('should policy field have required error', () => {
     let errors = {};
-    let policy = component.contactForm.controls['policy'];
+    const policy = component.contactForm.controls['policy'];
     errors = policy.errors || {};
     expect(errors['required']).toBeTruthy();
   });
 
   it('A valid form should emit the Dominicode subscription', () => {
-    //by default the form need to be invalid
+    // by default the form need to be invalid
     expect(component.contactForm.valid).toBeFalsy();
-    //set values for fields in the form
-    component.contactForm.controls['email'].setValue("arrecia@ahi.com");
+    // set values for fields in the form
+    component.contactForm.controls['email'].setValue('arrecia@ahi.com');
     component.contactForm.controls['policy'].setValue(true);
-    //On set values the form need to be valid
+    // On set values the form need to be valid
     expect(component.contactForm.valid).toBeTruthy();
 
-    let dominicoder : Dominicoder
+    let dominicoder: Dominicoder;
     // Subscribe to eventemitter and get the submitted form value
     component.onSave.subscribe((value: Dominicoder) => dominicoder = value);
 
@@ -74,7 +74,7 @@ describe('ContactComponent', () => {
     component.onSaveForm();
 
     // Validate the form have same values
-    expect(dominicoder.email).toBe("arrecia@ahi.com");
+    expect(dominicoder.email).toBe('arrecia@ahi.com');
     expect(dominicoder.policy).toBe(true);
   });
 
