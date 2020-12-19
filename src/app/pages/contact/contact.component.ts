@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Dominicoder } from 'src/app/models/dominicoder';
 
 @Component({
   selector: 'app-contact',
@@ -9,6 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ContactComponent implements OnInit {
   contactForm: FormGroup;
   private isEmail = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
+  @Output() onSave: EventEmitter<Dominicoder> = new EventEmitter();
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -19,8 +21,12 @@ export class ContactComponent implements OnInit {
     if (this.contactForm.valid) {
       console.log('Form-> ' + JSON.stringify(this.contactForm.value));
       alert('Form saved!!');
+      this.onSave.emit(
+        new Dominicoder(this.contactForm.value.email, this.contactForm.value.policy)
+      )
     } else {
       alert('Not valid');
+      this.onSave.emit(new Dominicoder("", false));
     }
     this.contactForm.reset();
   }
