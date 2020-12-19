@@ -31,12 +31,24 @@ describe('ContactComponent', () => {
     let email = component.contactForm.controls['email'];
     expect(email.valid).toBeFalsy();
   });
+
   it('should email field have required error', () => {
     let errors = {};
     let email = component.contactForm.controls['email'];
     errors = email.errors || {};
     expect(errors['required']).toBeTruthy();
   });
+
+  it('should invalid email field have pattern error', () => {
+    debugger;
+    let errors = {};
+    let email = component.contactForm.controls['email'];
+    email.setValue("arrecia1ahi.");
+
+    errors = email.errors || {};
+    expect(errors['pattern']).toBeTruthy();
+  });
+
 
   it('should policy field have required error', () => {
     let errors = {};
@@ -45,7 +57,7 @@ describe('ContactComponent', () => {
     expect(errors['required']).toBeTruthy();
   });
 
-  it('A valid form should emit the Dominicode suscription', () => {
+  it('A valid form should emit the Dominicode subscription', () => {
     //by default the form need to be invalid
     expect(component.contactForm.valid).toBeFalsy();
     //set values for fields in the form
