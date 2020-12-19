@@ -21,12 +21,10 @@ export class ContactComponent implements OnInit {
   onSaveForm(): void {
     if (this.contactForm.valid) {
       console.log('Form-> ' + JSON.stringify(this.contactForm.value));
-      alert('Form saved!!');
       this.onSave.emit(
         new Dominicoder(this.contactForm.value.email, this.contactForm.value.policy)
       );
     } else {
-      alert('Not valid');
       this.onSave.emit(new Dominicoder('', false));
     }
     this.contactForm.reset();
